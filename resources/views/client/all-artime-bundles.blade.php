@@ -1,0 +1,164 @@
+@extends('client')
+
+{{-- External Style Section --}}
+@section('style')
+    {!! Html::style('assets/libs/data-table/datatables.min.css') !!}
+@endsection
+
+
+@section('content')
+    <section class="wrapper-bottom-sec">
+        <div class="p-30">
+            <h2 class="page-title">{{ language_data('Airtime Bundle Plan') }}</h2>
+        </div>
+        <div class="p-30 p-t-none p-b-none">
+            @include('notification.notify')
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ language_data('Airtime Bundle Plan') }}</h3>
+                        </div>
+                        <div class="panel-body p-none">
+                            <table class="table data-table table-hover">
+                                <thead style="white-space: nowrap;">
+                                    <tr>
+                                        <th>{{ language_data('SL') }}#</th>
+                                        <th>Bundle Name</th>
+                                        <th>Units</th>
+                                        <th>{{ language_data('Plan type') }}</th>
+                                        <th>Price</th>
+                                        <th>{{ language_data('Transaction Fee') }}</th>
+                                        <th>{{ language_data('Discount Type') }}</th>
+                                        <th>{{ language_data('Apply Discount') }}</th>
+                                        <th>{{ language_data('Discount amount') }}</th>
+                                        <th>{{ language_data('Goverment Charges Type') }}</th>
+                                        <th>{{ language_data('Apply Goverment charges') }}</th>
+                                        <th>{{ language_data('Goverment Charges Amount') }}</th>
+                                        <th>{{ language_data('Action') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="white-space: nowrap;">
+
+                                    @foreach ($airtime_bundle as $airtime)
+                                        <tr>
+                                            <td data-label="SL">{{ $loop->iteration }}</td>
+                                            <td data-label="bundle_name">
+                                                <p>{{ $airtime->bundle_name }}</p>
+                                            </td>
+                                            <td data-label="unit_from">
+                                                <p>{{ $airtime->units }}</p>
+                                            </td>
+                                            <td data-label="plan_type">
+                                                <p>{{ $airtime->plan->name }}</p>
+                                            </td>
+                                            <td data-label="price">
+                                                <p>KES {{ $airtime->price }}</p>
+                                            </td>
+                                            <td data-label="transaction_fee">
+                                                <p>{{ $airtime->transaction_fee }}%</p>
+                                            </td>
+
+                                            @if ($airtime->discount_type == 2)
+                                                <td data-label="discount_type">
+                                                    <p>{{ language_data('fixed') }}</p>
+                                                </td>
+                                            @elseif($airtime->discount_type == 3)
+                                                <td data-label="discount_type">
+                                                    <p>{{ language_data('No Discount') }}</p>
+                                                </td>
+                                            @else
+                                                <td data-label="discount_type">
+                                                    <p>{{ language_data('percent') }}</p>
+                                                </td>
+                                            @endif
+
+                                            @if ($airtime->apply_discount == 1)
+                                                <td data-label="apply_discount">
+                                                    <p>{{ language_data('one time') }}</p>
+                                                </td>
+                                            @elseif($airtime->apply_discount == 2)
+                                                <td data-label="apply_discount">
+                                                    <p>{{ language_data('recurring') }}</p>
+                                                </td>
+                                            @else
+                                                <td data-label="apply_discount">
+                                                    <p>{{ language_data('first purchase only') }}</p>
+                                                </td>
+                                            @endif
+
+                                            <td data-label="discount_amt">
+                                                <p>KES {{ $airtime->discount_amount }}</p>
+                                            </td>
+
+                                            @if ($airtime->govt_charges_type == 2)
+                                                <td data-label="govt_charges_type">
+                                                    <p>{{ language_data('fixed') }}</p>
+                                                </td>
+                                            @else
+                                                <td data-label="govt_charges_type">
+                                                    <p>{{ language_data('percent') }}</p>
+                                                </td>
+                                            @endif
+
+                                            @if ($airtime->apply_govt_charges == 1)
+                                                <td data-label="apply_govt_charges">
+                                                    <p>{{ language_data('Tax') }}</p>
+                                                </td>
+                                            @else
+                                                <td data-label="apply_govt_charges">
+                                                    <p>{{ language_data('other charges') }}</p>
+                                                </td>
+                                            @endif
+
+
+                                            <td data-label="govt_charges_amt">
+                                                <p>KES {{ $airtime->govt_charges_amt }}</p>
+                                            </td>
+
+
+                                            <td data-label="Actions">
+                                                <a class="btn btn-complete btn-xs"
+                                                    href="{{ url('user/sms/view-airtime-bundle/' . $airtime->id) }}"><i
+                                                        class="fa fa-edit"></i>Puchase</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+@endsection
+
+{{-- External Style Section --}}
+@section('script')
+    {!! Html::script('assets/libs/handlebars/handlebars.runtime.min.js') !!}
+    {!! Html::script('assets/js/form-elements-page.js') !!}
+    {!! Html::script('assets/libs/data-table/datatables.min.js') !!}
+    {!! Html::script('assets/js/bootbox.min.js') !!}
+
+
+    <script>
+        $(document).ready(function() {
+
+            $('.data-table').DataTable({
+                language: {
+                    url: '{!! url(
+                        'assets/libs/data-table/i18n/' . get_language_code(Auth::guard('client')->user()->lan_id)->language . '.lang',
+                    ) !!}'
+                },
+                scrollX: true
+            })
+
+
+
+        });
+    </script>
+@endsection

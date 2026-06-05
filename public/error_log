@@ -1,0 +1,2 @@
+[03-Dec-2022 23:01:06 Africa/Nairobi] PHP Fatal error:  Label 'Log' already defined in /home3/citrusl1/public_html/test/app/Http/Controllers/MpesaResponseController.php on line 104
+[03-Dec-2022 23:03:25 Africa/Nairobi] PHP Fatal error:  Cannot use Log as Log because the name is already in use in /home3/citrusl1/public_html/test/app/Http/Controllers/MpesaResponseController.php on line 19
