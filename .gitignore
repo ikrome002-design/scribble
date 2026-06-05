@@ -1,0 +1,124 @@
+# --------------------------------------------------
+# Citrus Version 0 / Laravel / Node / Legacy Assets
+# --------------------------------------------------
+
+# Dependencies
+/vendor/
+/node_modules/
+application/vendor/
+application/node_modules/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+auth.json
+
+# Large backups and archives
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+backup_*.zip
+
+# Logs
+*.log
+error_log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Laravel storage/cache
+/storage/logs/*.log
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/bootstrap/cache/*.php
+/storage/pail
+application/storage/logs/*.log
+application/storage/framework/cache/data/*
+application/storage/framework/sessions/*
+application/storage/framework/views/*
+application/bootstrap/cache/*.php
+application/storage/pail
+application/storage/installed
+application/storage/PayNowTransaction.ini
+
+# Keep Laravel placeholder files where they exist
+!/storage/logs/.gitignore
+!/storage/framework/cache/.gitignore
+!/storage/framework/cache/data/.gitignore
+!/storage/framework/sessions/.gitignore
+!/storage/framework/views/.gitignore
+!/bootstrap/cache/.gitignore
+!application/storage/logs/.gitignore
+!application/storage/framework/cache/.gitignore
+!application/storage/framework/cache/data/.gitignore
+!application/storage/framework/sessions/.gitignore
+!application/storage/framework/views/.gitignore
+!application/bootstrap/cache/.gitignore
+
+# Public generated files
+/public/build/
+/public/hot
+/public/storage
+/public_html/storage
+/public_html/hot
+
+# Local databases / database dumps
+/database/*.sqlite
+/database/*.sqlite-journal
+application/database/*.sqlite
+application/database/*.sqlite-journal
+*.sql
+*.sql.gz
+
+# Build/cache folders
+.vite/
+dist/
+build/
+.cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# PHP tooling binaries
+cs-fixer.phar
+.phpactor.json
+
+# Docker/local data
+/dbdata/
+docker-compose.override.yml
+
+# IDE files
+/.idea/
+/.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Temporary/backup files
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.backup
+
+# Certificates and keys
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+cacert.pem
+
+# Deployment artifacts
+/deploy/
+/releases/
