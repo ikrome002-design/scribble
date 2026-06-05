@@ -1,0 +1,128 @@
+@extends('admin-pro')
+
+@section('style')
+    {!! Html::style('assets/libs/data-table/datatables.min.css') !!}
+    @include('partials.styles')
+@endsection
+
+@section('content')
+    <section class="wrapper-bottom-sec">
+        <div class="p-30">
+            <h2 class="page-title">All Visitors</h3>
+        </div>
+        <div class="p-30 p-t-none p-b-none">
+            @include('notification.notify')
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel">
+                        <form id="search-date">
+                            <h4>Search by dates</h4>
+                            <table border="0" cellspacing="5" cellpadding="5">
+                                <tbody>
+                                    <tr>
+                                        <td>Check In</td>
+                                        <td>Start date:</td>
+                                        <td><input type="datetime-local" id="check_in_start_date"
+                                                name="check_in_start_date">
+                                        </td>
+                                        <td>End date:</td>
+                                        <td><input type="datetime-local" id="check_in_end_date" name="check_in_end_date">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Check Out</td>
+                                        <td>Start date:</td>
+                                        <td><input type="datetime-local" id="check_out_start_date"
+                                                name="check_out_start_date">
+                                        </td>
+                                        <td>End date:</td>
+                                        <td><input type="datetime-local" id="check_out_end_date" name="check_in_end_date">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><input type="reset" class="btn-complete" value="Reset Dates"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Visitors</h3>
+                        </div>
+
+                        <div class="panel-body p-none">
+                            {{ $dataTable->table() }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+@endsection
+
+{{-- External Style Section --}}
+@section('script')
+    {!! Html::script('assets/libs/handlebars/handlebars.runtime.min.js') !!}
+    {!! Html::script('assets/js/form-elements-page.js') !!}
+    {!! Html::script('assets/libs/data-table/datatables.min.js') !!}
+    {!! Html::script('assets/js/bootbox.min.js') !!}
+    @include('partials.scripts')
+    {{ $dataTable->scripts() }}
+    <script>
+        $('body').delegate(".delete", "click", function(e) {
+            e.preventDefault();
+            var url = this.href;
+            Swal.fire({
+                text: 'Are you sure, you want to delete this visitor',
+                confirmButtonText: 'Yes',
+                showCancelButton: true,
+                cancelButtonText: 'No'
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(`<form method="post" action=${url}>
+                               @csrf
+                               @method('DELETE')
+                            </form>`).appendTo('body').submit();
+                }
+            })
+
+        })
+        $('body').delegate(".checkout-visitor", "click", function(e) {
+            e.preventDefault();
+            var url = this.href;
+            Swal.fire({
+                text: 'Are you sure, you want to checkout this visitor',
+                confirmButtonText: 'Yes',
+                showCancelButton: true,
+                cancelButtonText: 'No',
+                html: `<form action='${url}' method='post' id="checkout-visitor-form">
+                <label>Check out time</label>
+                <input type="datetime-local" name="check_out_time" class="swal2-input" value=${convertToLocal()}><br>
+                </form>
+                  `,
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#checkout-visitor-form').submit()
+                }
+            })
+
+        })
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#check_in_start_date, #check_in_end_date,#check_out_start_date, #check_out_end_date').on('change',
+                function() {
+                    $('#visitor-table').DataTable().ajax.reload();
+                });
+        });
+    </script>
+@endsection

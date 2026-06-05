@@ -1,0 +1,52 @@
+/node_modules
+/vendor
+
+# Laravel / PHP runtime files
+/bootstrap/cache/*.php
+/storage/*.key
+/storage/app/*
+!/storage/app/.gitignore
+/storage/framework/*
+!/storage/framework/.gitignore
+/storage/framework/cache/
+!/storage/framework/cache/.gitignore
+/storage/framework/sessions/
+!/storage/framework/sessions/.gitignore
+/storage/framework/testing/
+!/storage/framework/testing/.gitignore
+/storage/framework/views/
+!/storage/framework/views/.gitignore
+/storage/logs/*
+!/storage/logs/.gitignore
+/.phpunit.result.cache
+
+# Frontend build/runtime files
+/public/build
+/public/hot
+/public/storage
+/dist
+/build
+
+# Environment and local credentials
+.env
+.env.*
+!.env.example
+auth.json
+
+# Local dumps, archives, logs, and temporary output
+*.sql
+*.zip
+*.log
+output.txt
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+Homestead.json
+Homestead.yaml
+/.fleet
+/.idea
+/.vscode
