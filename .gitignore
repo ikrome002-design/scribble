@@ -1,0 +1,56 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+application/.env
+application/.env.*
+!application/.env.example
+
+# PHP / Composer
+vendor/
+application/vendor/
+composer.phar
+
+# Node / frontend
+node_modules/
+application/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Laravel runtime files
+application/storage/*.key
+application/storage/logs/*.log
+application/storage/framework/cache/*
+application/storage/framework/sessions/*
+application/storage/framework/views/*
+application/bootstrap/cache/*.php
+
+# Generated Mix assets
+application/public/hot
+application/public/mix-manifest.json
+application/public/js/
+application/public/css/
+
+# Build outputs and caches
+dist/
+build/
+.cache/
+.parcel-cache/
+.phpunit.result.cache
+
+# Local databases and dumps
+*.sqlite
+*.sqlite3
+*.db
+*.sql.gz
+*.dump
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
