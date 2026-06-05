@@ -1,0 +1,95 @@
+# Environment files
+.env
+.env.*
+!.env.example
+application/.env
+application/.env.*
+!application/.env.example
+
+# Dependencies
+/vendor/
+application/vendor/
+/node_modules/
+application/node_modules/
+
+# Build output and caches
+dist/
+build/
+coverage/
+.cache/
+.parcel-cache/
+public/hot
+application/public/hot
+application/public/js/
+application/public/css/
+application/npm-debug.log*
+application/yarn-error.log*
+
+# Laravel runtime artifacts
+application/storage/logs/*
+!application/storage/logs/.gitkeep
+application/storage/framework/cache/*
+!application/storage/framework/cache/.gitkeep
+application/storage/framework/cache/data/*
+!application/storage/framework/cache/data/
+!application/storage/framework/cache/data/.gitkeep
+application/storage/framework/sessions/*
+!application/storage/framework/sessions/.gitkeep
+application/storage/framework/views/*
+!application/storage/framework/views/.gitkeep
+application/storage/app/*
+!application/storage/app/.gitkeep
+!application/storage/app/public/
+!application/storage/app/public/.gitkeep
+application/storage/PayNowTransaction.ini
+application/storage/installed
+application/bootstrap/cache/*.php
+!application/bootstrap/cache/.gitkeep
+
+# Generated helpers
+application/_ide_helper.php
+application/.phpstorm.meta.php
+
+# Database dumps and local data
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# Runtime upload/data folders
+assets/admin_pic/*
+!assets/admin_pic/profile.jpg
+!assets/admin_pic/user.png
+!assets/admin_pic/.gitkeep
+assets/client_pic/*
+!assets/client_pic/profile.jpg
+!assets/client_pic/profile.png
+!assets/client_pic/user.png
+!assets/client_pic/user-avatar.png
+!assets/client_pic/.gitkeep
+assets/mms_file/*
+!assets/mms_file/.gitkeep
+assets/ticket_file/*
+!assets/ticket_file/
+!assets/ticket_file/.gitkeep
+assets/invoice_file/*
+!assets/invoice_file/
+!assets/invoice_file/.gitkeep
+assets/test_file/*
+!assets/test_file/.gitkeep
+voice/*
+!voice/
+!voice/.gitkeep
+
+# Logs
+*.log
+/logs/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo

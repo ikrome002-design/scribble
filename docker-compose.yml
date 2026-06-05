@@ -1,0 +1,53 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /var/www/html/application
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8080
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: scribble
+      DB_USERNAME: scribble
+      DB_PASSWORD: scribble
+      CACHE_DRIVER: file
+      SESSION_DRIVER: file
+      QUEUE_DRIVER: sync
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: scribble
+      MYSQL_USER: scribble
+      MYSQL_PASSWORD: scribble
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  node:
+    image: node:12
+    working_dir: /app/application
+    volumes:
+      - ./:/app
+    command: ["npm", "--version"]
+
+volumes:
+  db_data:
